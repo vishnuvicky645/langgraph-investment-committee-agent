@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* Design Tokens & Theme Support */
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Base resets & styles */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: #030712; /* Default deep slate dark */
+  color: #f3f4f6;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-theme {
+  background-color: #030712;
+  color: #f3f4f6;
+}
+
+body:not(.dark-theme) {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.45);
+}
+
+/* Glassmorphism custom classes */
+.glass-panel {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body.dark-theme .glass-panel {
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body:not(.dark-theme) .glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+/* Custom radial glows */
+.bg-radial-glow {
+  background: radial-gradient(circle at 75% 15%, rgba(99, 102, 241, 0.12), transparent 45%),
+              radial-gradient(circle at 25% 85%, rgba(168, 85, 247, 0.08), transparent 45%);
+}
+
+body:not(.dark-theme) .bg-radial-glow {
+  background: radial-gradient(circle at 75% 15%, rgba(99, 102, 241, 0.05), transparent 40%),
+              radial-gradient(circle at 25% 85%, rgba(168, 85, 247, 0.04), transparent 40%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #a855f7, #6366f1, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.button-gradient {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1, #3b82f6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-gradient:hover {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  transform: translateY(-1.5px);
+}
+
+/* Loading animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+body:not(.dark-theme) .animate-shimmer {
+  background: linear-gradient(90deg, rgba(15,23,42,0.03) 25%, rgba(15,23,42,0.06) 50%, rgba(15,23,42,0.03) 75%);
+  background-size: 200% 100%;
+}
