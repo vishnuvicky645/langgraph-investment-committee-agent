@@ -221,15 +221,8 @@ For complex multi-agent systems, LangGraph offers key advantages over ad-hoc asy
 
 ---
 
-## 🎓 12. Interview Talking Points
 
-- **API Failure Resilience**: Speak about implementing the `geminiRetry.js` exponential backoff utility, which retries requests up to 3 times on `503` (busy) codes with a 3-second delay, and catches quota limits (`429`) to serve structured fallback decision data gracefully.
-- **State Partitioning**: Discuss how LangGraph's state encapsulation ensures that specialist agents (e.g. Risk, Growth) only write to their designated scopes, preventing variables from polluting the memory stack.
-- **Theme-Aware Glassmorphism**: Highlight configuring Tailwind CSS v4 custom color classes and radial gradient overlays to support full light/dark responsiveness without visual degradation.
-
----
-
-## 🔮 13. Future Improvements
+## 🔮 12. Future Improvements
 
 - **Database Persistence**: Integrate MongoDB or PostgreSQL to store previous searches, watchlist configurations, and user accounts.
 - **Dynamic Risk Weights**: Enable users to weight specific agents (e.g., a risk-averse mode where the Risk Agent has veto power).
@@ -237,9 +230,9 @@ For complex multi-agent systems, LangGraph offers key advantages over ad-hoc asy
 
 ---
 
-## 👤 14. Author
+## 👤 13. Author
 
 - **Vishnu V** - *Full Stack & AI Engineer Intern*
-- Portfolio: [yourportfolio.com](https://yourportfolio.com)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [linkedin.com/in/yourusername](https://linkedin.com/in/yourusername)
+- Portfolio: (https://portfolio-4awh.onrender.com/)
+- GitHub: [vishnuvicky645](https://github.com/vishnuvicky645)
+- LinkedIn: [linkedin.com/in/VishnuVardhanReddyMunagala](www.linkedin.com/in/vishnu-vardhan-reddy-munagala21)
