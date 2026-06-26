@@ -46,8 +46,9 @@ export default function Dashboard() {
 
     try {
       setLoading(true);
+      const API = import.meta.env.VITE_API_URL;
       const response = await axios.post(
-        "https://langgraph-investment-committee-agent.onrender.com",
+        `${API}/analyze`,
         {
           company: searchTarget
         }
@@ -58,12 +59,12 @@ export default function Dashboard() {
         prev.includes(searchTarget) ? prev : [...prev, searchTarget]
       );
     } catch (error) {
-      console.error("ANALYSIS ERROR:", error);
-      if (error.response) {
-        alert(error.response.data.error || "API Quota exceeded or error.");
-      } else {
-        alert(error.message);
-      }
+      console.error(error);
+      alert(
+        error.response?.data?.error ||
+        error.message ||
+        "Unknown error occurred."
+      );
     } finally {
       setLoading(false);
     }
@@ -76,8 +77,9 @@ export default function Dashboard() {
     }
     try {
       setCompareLoading(true);
+      const API = import.meta.env.VITE_API_URL;
       const response = await axios.post(
-        "https://your-backend.onrender.com/compare",
+        `${API}/compare`,
         {
           company1: companyA,
           company2: companyB
@@ -85,12 +87,12 @@ export default function Dashboard() {
       );
       setCompareData(response.data);
     } catch (error) {
-      console.error("COMPARE ERROR:", error);
-      if (error.response) {
-        alert(error.response.data.error || "An error occurred during comparison.");
-      } else {
-        alert(error.message);
-      }
+      console.error(error);
+      alert(
+        error.response?.data?.error ||
+        error.message ||
+        "Unknown error occurred."
+      );
     } finally {
       setCompareLoading(false);
     }
