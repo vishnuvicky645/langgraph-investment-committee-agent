@@ -46,9 +46,12 @@ export default function Dashboard() {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:5000/analyze", {
-        company: searchTarget
-      });
+      const response = await axios.post(
+        "https://langgraph-investment-committee-agent.onrender.com",
+        {
+          company: searchTarget
+        }
+      );
 
       setData(response.data);
       setHistory((prev) =>
@@ -73,10 +76,13 @@ export default function Dashboard() {
     }
     try {
       setCompareLoading(true);
-      const response = await axios.post("http://localhost:5000/compare", {
-        company1: companyA,
-        company2: companyB
-      });
+      const response = await axios.post(
+        "https://your-backend.onrender.com/compare",
+        {
+          company1: companyA,
+          company2: companyB
+        }
+      );
       setCompareData(response.data);
     } catch (error) {
       console.error("COMPARE ERROR:", error);
@@ -131,16 +137,16 @@ export default function Dashboard() {
     // Header
     doc.setFillColor(...primaryColor);
     doc.rect(marginX, posY, contentWidth, 30, "F");
-    
+
     doc.setTextColor(255, 255, 255);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
     doc.text("AI INVESTMENT COMMITTEE REPORT", marginX + 8, posY + 12);
-    
+
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, marginX + 8, posY + 22);
-    
+
     posY += 40;
 
     // Company Title
@@ -166,10 +172,10 @@ export default function Dashboard() {
       doc.setTextColor(...textColor);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      
+
       const splitText = doc.splitTextToSize(text, contentWidth);
       const textHeight = splitText.length * 5;
-      
+
       checkPageOverflow(textHeight + 10);
       doc.text(splitText, marginX, posY);
       posY += textHeight + 12;
@@ -201,7 +207,7 @@ export default function Dashboard() {
       doc.setTextColor(...textColor);
       doc.setFont("helvetica", "bold");
       doc.text(`${item.agent}: `, marginX, posY);
-      
+
       const agentWidth = doc.getTextWidth(`${item.agent}: `);
       if (item.decision === "INVEST") {
         doc.setTextColor(6, 95, 70);
@@ -209,11 +215,11 @@ export default function Dashboard() {
         doc.setTextColor(153, 27, 27);
       }
       doc.text(item.decision, marginX + agentWidth, posY);
-      
+
       const decisionWidth = doc.getTextWidth(item.decision);
       doc.setTextColor(...secondaryTextColor);
       doc.setFont("helvetica", "normal");
-      
+
       const reasonText = ` - ${item.reason}`;
       const splitReason = doc.splitTextToSize(reasonText, contentWidth - agentWidth - decisionWidth - 5);
       doc.text(splitReason, marginX + agentWidth + decisionWidth, posY);
@@ -226,17 +232,17 @@ export default function Dashboard() {
     checkPageOverflow(35);
     doc.setFillColor(...lightBgColor);
     doc.rect(marginX, posY, contentWidth, 30, "F");
-    
+
     doc.setTextColor(...primaryColor);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.text("6. Final Committee Decision", marginX + 6, posY + 8);
-    
+
     doc.setTextColor(...textColor);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
     doc.text(`Decision: `, marginX + 6, posY + 16);
-    
+
     const isInvest = data.finalDecision.decision === "INVEST";
     if (isInvest) {
       doc.setTextColor(6, 95, 70);
@@ -245,11 +251,11 @@ export default function Dashboard() {
     }
     doc.setFont("helvetica", "bold");
     doc.text(data.finalDecision.decision, marginX + 24, posY + 16);
-    
+
     doc.setTextColor(...textColor);
     doc.setFont("helvetica", "normal");
     doc.text(`Confidence: `, marginX + 6, posY + 23);
-    
+
     doc.setFont("helvetica", "bold");
     doc.text(`${data.finalDecision.confidence}%`, marginX + 28, posY + 23);
 
@@ -360,9 +366,8 @@ export default function Dashboard() {
                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Price: <span className="font-bold text-slate-800 dark:text-slate-200">{stock.price}</span> ({stock.change})</p>
                         </div>
                         <div className="flex flex-col items-end gap-2">
-                          <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold ${
-                            stock.decision === "INVEST" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20" : "bg-rose-500/10 text-rose-600 dark:text-rose-450 border border-rose-500/20"
-                          }`}>{stock.decision}</span>
+                          <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold ${stock.decision === "INVEST" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20" : "bg-rose-500/10 text-rose-600 dark:text-rose-450 border border-rose-500/20"
+                            }`}>{stock.decision}</span>
                           <button
                             onClick={() => {
                               setCompany(stock.symbol);
